@@ -23,6 +23,9 @@ express.get('/PictoFree.ttf', function(req, res) {
     res.sendfile(__dirname + '/public/font/PictoFree.ttf');
 });
 
+express.get('/connect.mp3', function(req, res) {
+    res.sendfile(__dirname + '/public/sound/connect.mp3');
+});
 
 io.configure(function () { 
   io.set("transports", ["xhr-polling"]); 
@@ -44,23 +47,24 @@ io.sockets.on('connection', function(socket) {
     socket.on('adduser', function(username) {
         var strippedmsg = username.replace(/(<([^>]+)>)/ig,"");
         socket.username = strippedmsg;
-        if (strippedmsg === "SERVER")
-            strippedmsg = "faker!";
-        if(strippedmsg === username) {
-            if (i != 0){
-                strippedmsg += i;   
-                socket.username = strippedmsg;
-                i++;
-            } else {            
-                i++;
-                socket.username = strippedmsg;
-            }
 
-            usernames[strippedmsg] = strippedmsg;
-            socket.broadcast.emit('updatechat', 'SERVER', strippedmsg + ' has connected!');
+        if(strippedmsg === username) {
+                if (i != 0){
+                    strippedmsg += i;   
+                    socket.username = strippedmsg;
+                    i = 0;
+                } else {            
+                    i++;
+                    socket.username = strippedmsg;
+                }
+            
+                usernames[strippedmsg] = strippedmsg;
+                socket.broadcast.emit('updatechat', 'SERVER', strippedmsg + ' has connected!');
+                                        
+                io.sockets.emit('updateusers', usernames);
         }
-        io.sockets.emit('updateusers', usernames);
     });
+
 
     socket.on('disconnect', function() {
         delete usernames[socket.username];

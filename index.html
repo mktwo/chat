@@ -6,6 +6,10 @@
 	//var socket = io.connect('http://localhost:8080');
 	var socket = io.connect('http://mktwochat.jit.su/');
 
+	var snd = new Audio("/connect.mp3");
+	snd.preload = 'auto';
+	snd.muted = true;
+
 	socket.on('connect', function() {
 		socket.emit('adduser', prompt("What's your name?", "user"));
 	});
@@ -20,6 +24,7 @@
 		$.each(data, function(key, value) {
 			$('#users').append('<div>'+key+'</div>');
 		});
+		snd.play();
 	});
 
 	$(function(){
@@ -30,11 +35,18 @@
 		});
 
 		$("#data").keydown(function(event){
-	    if(event.keyCode == 13){
-	        $("#send").click();
-	        return;
-	    }
-	});
+		    if(event.keyCode == 13){
+		        $("#send").click();
+		        return;
+		    }
+		});
+
+
+		$('#mutebutton').click(function(){
+			snd.muted = !snd.muted;
+			$('#mutebutton').html(snd.muted ? "Unmute?" : "Mute?");
+		});
+
 	});
 
 </script>
@@ -42,6 +54,7 @@
 	<b id="picto">U</b>USERS
 	<div id="users"></div>
 </div>
+<button id="mutebutton" style="float:right">Unmute?</button>
 <div style="float:left;width:300px;height:250px;padding:10px;">
 	<div id="picto">c</div>CHAT
 	<div id="convo"></div>

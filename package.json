@@ -1,7 +1,7 @@
 {
   "name": "mktwo_chat",
   "description": "node chat app with socket.io",
-  "version": "0.2.3-2",
+  "version": "0.2.5-2",
   "dependencies": {
     "express": "2.x",
     "socket.io": "0.8.4"
