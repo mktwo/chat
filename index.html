@@ -3,8 +3,8 @@
 <script src="/socket.io/socket.io.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
 <script>
-	//var socket = io.connect('http://localhost:8080');
-	var socket = io.connect('http://mktwochat.jit.su/');
+	var socket = io.connect('http://localhost:8080');
+	//var socket = io.connect('http://mktwochat.jit.su/');
 
 	socket.on('connect', function() {
 		socket.emit('adduser', prompt("What's your name?"));
@@ -25,10 +25,7 @@
 		$('#send').click(function() {
 			var message = $('#data').val();
 			$('#data').val('');
-			var strippedmsg = message.replace(/(<([^>]+)>)/ig,"");
-			strippedmsg = strippedmsg.replace(/(^|\W+)\@([\w\-]+)/gm,'$1<a href="http://twitter.com/$2" target="_blank">@$2</a>');
-			strippedmsg = strippedmsg.replace(/\[(([^\]])*)\]/g,'<a href="http://geekli.st/$1" target="_blank">$1</a>');
-			socket.emit('sendchat', strippedmsg);
+			socket.emit('sendchat', message);
  			$("#convo").animate({ scrollTop: $("#convo").prop("scrollHeight") - $('#convo').height()}, 100);
 		});
 

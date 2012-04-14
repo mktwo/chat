@@ -34,7 +34,10 @@ var usernames = {};
 io.sockets.on('connection', function(socket) {
 
     socket.on('sendchat', function(data) {
-        io.sockets.emit('updatechat', socket.username, data);
+        var strippedmsg = data.replace(/(<([^>]+)>)/ig,"");
+            strippedmsg = strippedmsg.replace(/(^|\W+)\@([\w\-]+)/gm,'$1<a href="http://twitter.com/$2" target="_blank">@$2</a>');
+            strippedmsg = strippedmsg.replace(/\[(([^\]])*)\]/g,'<a href="http://geekli.st/$1" target="_blank">$1</a>');
+        io.sockets.emit('updatechat', socket.username, strippedmsg);
     });
 
     socket.on('adduser', function(username) {
