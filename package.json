@@ -1,0 +1,16 @@
+{
+  "name": "mktwo_chat",
+  "description": "node chat app with socket.io",
+  "version": "0.2.3-2",
+  "dependencies": {
+    "express": "2.x",
+    "socket.io": "0.8.4"
+  },
+  "subdomain": "mktwochat",
+  "scripts": {
+    "start": "app.js"
+  },
+  "engines": {
+    "node": "0.6.x"
+  }
+}
