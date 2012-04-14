@@ -3,8 +3,8 @@
 <script src="/socket.io/socket.io.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
 <script>
-	var socket = io.connect('http://localhost:8080');
-	//var socket = io.connect('http://mktwochat.jit.su/');
+	//var socket = io.connect('http://localhost:8080');
+	var socket = io.connect('http://mktwochat.jit.su/');
 
 	socket.on('connect', function() {
 		socket.emit('adduser', prompt("What's your name?"));
@@ -48,3 +48,4 @@
 	<input id="data" style="width:200px;" maxlength="140"/>
 	<button id="send"><span id="picto">Y</span></button>
 </div>
+<footer>Fork me on <a href="http://github.com/mktwo/chat">GitHub!</a></footer>
