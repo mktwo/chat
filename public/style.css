@@ -57,3 +57,15 @@ b {
 code {
 	font-family: 'Courier New', monospace;
 }
+
+footer {
+	color: #aaa;
+	text-shadow: #eee 1px 1px 0;
+	font-size: 0.75em;
+	clear: both;
+	font-weight: bolder;
+}
+
+footer a {
+	color: #999;
+}
