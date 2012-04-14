@@ -30,6 +30,7 @@ io.configure(function () {
 });
 
 var usernames = {};
+var i = 0;
 
 io.sockets.on('connection', function(socket) {
 
@@ -43,8 +44,21 @@ io.sockets.on('connection', function(socket) {
     socket.on('adduser', function(username) {
         var strippedmsg = username.replace(/(<([^>]+)>)/ig,"");
         socket.username = strippedmsg;
-        usernames[strippedmsg] = strippedmsg;
-        socket.broadcast.emit('updatechat', 'SERVER', strippedmsg + ' has connected!');
+        if (strippedmsg === "SERVER")
+            strippedmsg = "faker!";
+        if(strippedmsg === username) {
+            if (i != 0){
+                strippedmsg += i;   
+                socket.username = strippedmsg;
+                i++;
+            } else {            
+                i++;
+                socket.username = strippedmsg;
+            }
+
+            usernames[strippedmsg] = strippedmsg;
+            socket.broadcast.emit('updatechat', 'SERVER', strippedmsg + ' has connected!');
+        }
         io.sockets.emit('updateusers', usernames);
     });
 

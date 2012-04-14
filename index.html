@@ -7,7 +7,7 @@
 	var socket = io.connect('http://mktwochat.jit.su/');
 
 	socket.on('connect', function() {
-		socket.emit('adduser', prompt("What's your name?"));
+		socket.emit('adduser', prompt("What's your name?", "user"));
 	});
 
 	socket.on('updatechat', function(username, data) {
