@@ -61,8 +61,12 @@ code {
 footer {
 	color: #aaa;
 	text-shadow: #eee 1px 1px 0;
-	font-size: 0.75em;
+	font-size: 0.6em;
 	clear: both;
+}
+
+footer span {
+	font-size: 1.5em;
 	font-weight: bolder;
 }
 
