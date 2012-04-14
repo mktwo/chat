@@ -12,6 +12,7 @@
 
 	socket.on('updatechat', function(username, data) {
 		$('#convo').append('<b>'+username+':</b>  '+data+'<br>');
+		$("#convo").animate({ scrollTop: $("#convo").prop("scrollHeight") - $('#convo').height()}, 100);
 	});
 
 	socket.on('updateusers', function(data){
@@ -26,7 +27,6 @@
 			var message = $('#data').val();
 			$('#data').val('');
 			socket.emit('sendchat', message);
- 			$("#convo").animate({ scrollTop: $("#convo").prop("scrollHeight") - $('#convo').height()}, 100);
 		});
 
 		$("#data").keydown(function(event){
@@ -38,11 +38,11 @@
 	});
 
 </script>
-<div style="float:left;width:150px;border-right:1px solid #aaa;height:300px;padding:10px;overflow:scroll-y;">
+<div style="float:left;width:150px;border-right:1px solid #aaa;height:300px;padding:10px;">
 	<b id="picto">U</b>USERS
 	<div id="users"></div>
 </div>
-<div style="float:left;width:300px;height:250px;overflow:scroll-y;padding:10px;">
+<div style="float:left;width:300px;height:250px;padding:10px;">
 	<div id="picto">c</div>CHAT
 	<div id="convo"></div>
 	<input id="data" style="width:200px;" maxlength="140"/>
