@@ -41,9 +41,10 @@ io.sockets.on('connection', function(socket) {
     });
 
     socket.on('adduser', function(username) {
-        socket.username = username;
-        usernames[username] = username;
-        socket.broadcast.emit('updatechat', 'SERVER', username + ' has connected!');
+        var strippedmsg = username.replace(/(<([^>]+)>)/ig,"");
+        socket.username = strippedmsg;
+        usernames[strippedmsg] = strippedmsg;
+        socket.broadcast.emit('updatechat', 'SERVER', strippedmsg + ' has connected!');
         io.sockets.emit('updateusers', usernames);
     });
 
