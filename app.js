@@ -54,23 +54,25 @@ io.sockets.on('connection', function(socket) {
 
     socket.on('adduser', function(username) {
         var strippedmsg = username.replace(/(<([^>]+)>)/ig,"");
-        socket.username = strippedmsg;
+        var finalmsg;
         if (/\S/.test(strippedmsg)) {
-            if(strippedmsg === username) {
-                    if (i != 0){
-                        strippedmsg += i;   
-                        socket.username = strippedmsg;
-                        i = 0;
-                    } else {            
-                        i++;
-                        socket.username = strippedmsg;
-                    }
-                
-                usernames[strippedmsg] = strippedmsg;
-                socket.broadcast.emit('updatechat', 'SERVER', strippedmsg + ' has connected!');
-                                        
-                io.sockets.emit('updateusers', usernames);
+            if (usernames.hasOwnProperty(strippedmsg)) {
+                i++;
+            } else {
+                i=0;
             }
+
+            if(i == 0){
+                finalmsg = strippedmsg;
+                
+            } else {
+                finalmsg = strippedmsg+i;
+            }
+            
+            socket.username = finalmsg;
+            usernames[finalmsg] = finalmsg;
+            socket.broadcast.emit('updatechat', 'SERVER', finalmsg + ' has connected!');                           
+            io.sockets.emit('updateusers', usernames);
         }
     });
 
