@@ -15,9 +15,17 @@ Put it in a folder, go there
 `npm install .` ( maybe `nmp install . -d`)  
 Change index.html depending on local or server  
 local: `var socket = io.connect('http://localhost:8080');`  
-server `var socket = io.connect('http://serveraddress.com/');`  
+server: `var socket = io.connect('http://serveraddress.com/');`  
 `node app.js` to run.  
 
 **Demo**
 =======================
 Find it on mktwochat.jit.su
+
+**Features**
+=======================
+-Opt-in audio notification of connect/disconnect  
+-Anti-cheat: try sending '/godmode'  
+-Twitter/Geekli.st linking: @username for Twitter, [username] for geekli.st  
+-No duplicate names: Adds a number to every duplicate name!  
+-Completely free to use for whatever purpose, as long as you keep the 'copyleft'-symbol  

@@ -41,7 +41,15 @@ io.sockets.on('connection', function(socket) {
         var strippedmsg = data.replace(/(<([^>]+)>)/ig,"");
             strippedmsg = strippedmsg.replace(/(^|\W+)\@([\w\-]+)/gm,'$1<a href="http://twitter.com/$2" target="_blank">@$2</a>');
             strippedmsg = strippedmsg.replace(/\[(([^\]])*)\]/g,'<a href="http://geekli.st/$1" target="_blank">$1</a>');
-        io.sockets.emit('updatechat', socket.username, strippedmsg);
+            if (/\S/.test(strippedmsg)) {
+                 // string is not empty and not just whitespace
+                if (/(\/\w*)/g.test(strippedmsg)) {
+                    strippedmsg = " tried to cheat.";
+                    io.sockets.emit('updatechat','SERVER', socket.username+strippedmsg);
+                } else {
+                    io.sockets.emit('updatechat', socket.username, strippedmsg);
+                }
+            } 
     });
 
     socket.on('adduser', function(username) {
