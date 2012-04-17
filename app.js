@@ -2,7 +2,9 @@ var express = require('express').createServer();
 var io = require('socket.io').listen(express);
 var bot = require('./bot');
 
-express.listen(8080);
+var port = process.env.VCAP_APP_PORT || process.env['app.port'] || 8124;
+
+express.listen(port);
 
 express.get('/', function(req, res) {
     res.sendfile(__dirname + '/index.html');
