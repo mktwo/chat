@@ -1,5 +1,6 @@
 var express = require('express').createServer();
 var io = require('socket.io').listen(express);
+var bot = require('./bot');
 
 express.listen(8080);
 
@@ -49,6 +50,10 @@ io.sockets.on('connection', function(socket) {
                     strippedmsg = strippedmsg.replace(/\[(([^\]])*)\]/g,'<a href="http://geekli.st/$1" target="_blank">$1</a>');
                     io.sockets.emit('updatechat', socket.username, strippedmsg);
                 }
+                if (bot.read(strippedmsg))
+                    {
+                        io.sockets.emit('updatechat', 'InvisiBot', socket.username+': '+bot.answer())
+                    }
             } 
     });
 
