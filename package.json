@@ -1,16 +1,16 @@
 {
-  "name": "mktwo_chat",
+  "name": "talk",
   "description": "node chat app with socket.io",
-  "version": "0.2.7-2",
-  "dependencies": {
-    "express": "2.x",
-    "socket.io": "0.8.4"
-  },
-  "subdomain": "mktwochat",
+  "version": "0.2.0-1",
+  "subdomain": "talk",
   "scripts": {
     "start": "app.js"
   },
   "engines": {
     "node": "0.6.x"
+  },
+  "dependencies": {
+    "socket.io": "0.8.x",
+    "express": "2.5.x"
   }
 }

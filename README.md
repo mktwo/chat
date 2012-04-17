@@ -20,7 +20,7 @@ server: `var socket = io.connect('http://serveraddress.com/');`
 
 **Demo**
 =======================
-Find it on mktwochat.jit.su
+Find it on http:/talk.jit.su/
 
 **Features**
 =======================
