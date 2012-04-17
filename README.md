@@ -28,4 +28,5 @@ Find it on http:/talk.jit.su/
 -Anti-cheat: try sending '/godmode'  
 -Twitter/Geekli.st linking: @username for Twitter, [username] for geekli.st  
 -No duplicate names: Adds a number to every duplicate name!  
+-Question answering bot! `bot: question?`    
 -Completely free to use for whatever purpose, as long as you keep the 'copyleft'-symbol  

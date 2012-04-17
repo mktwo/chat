@@ -1,5 +1,5 @@
 function read(msg) {
-	if (/\b(bot: )(\w*)\b/g.test(msg)) {
+	if (/\b(bot: ?)(\w*)\b/g.test(msg)) {
 		answer();
 		return true;
 	} else {
