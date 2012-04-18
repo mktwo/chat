@@ -2,7 +2,7 @@ var express = require('express').createServer();
 var io = require('socket.io').listen(express);
 var bot = require('./bot');
 
-var port = process.env.VCAP_APP_PORT || process.env['app.port'] || 8124;
+var port = 3000;
 
 express.listen(port);
 

@@ -3,8 +3,11 @@
 <script src="/socket.io/socket.io.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
 <script>
-	//var socket = io.connect('http://localhost:8080');
-	var socket = io.connect('http://0.0.0.0');
+	var socket = io.connect('http://localhost:3000');
+	//var socket = io.connect('http://talk.jit.su');
+
+	var missed = 0;
+	var focused = true;
 
 	var snd = new Audio("/connect.mp3");
 	snd.preload = 'auto';
@@ -15,8 +18,12 @@
 	});
 
 	socket.on('updatechat', function(username, data) {
+		missed++;
 		$('#convo').append('<b>'+username+':</b>  '+data+'<br>');
 		$("#convo").animate({ scrollTop: $("#convo").prop("scrollHeight") - $('#convo').height()}, 100);
+		if(missed != 0 && !focused){
+			$('title').text("Just chattin' ("+missed+")");
+		}
 	});
 
 	socket.on('updateusers', function(data){
@@ -41,12 +48,20 @@
 		    }
 		});
 
+		$(window).focus(function() {
+			missed = 0;
+			$('title').text("Just chattin'");
+			focused = true;
+		});
+
+		$(window).blur(function() {
+			focused = false;
+		});
 
 		$('#mutebutton').click(function(){
 			snd.muted = !snd.muted;
 			$('#mutebutton').html(snd.muted ? "Unmute?" : "Mute?");
 		});
-
 	});
 
 </script>
